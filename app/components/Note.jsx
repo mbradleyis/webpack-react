@@ -36,7 +36,7 @@ export default class Note extends React.Component {
             onBlur={this.finishEdit.bind(this)}
             onKeyPress={this.checkEnter.bind(this)}/>
           </div>
-        : <div onClick={this.edit.bind(this)}>{task}</div>
+        : <div onClick={this.edit.bind(this)}>{task}<br/>{details}</div>
       }</div>
     );
   }
