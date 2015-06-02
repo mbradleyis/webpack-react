@@ -6,7 +6,8 @@ export default class App extends React.Component {
     super();
 
     this.state = {
-      notes: []
+      notes: [],
+      emptyError: ''
     };
   }
   render() {
@@ -15,7 +16,8 @@ export default class App extends React.Component {
 
     return (
       <div>
-        <button onClick={this.addItem.bind(this)}>+</button>
+        <button onClick={this.addItem.bind(this)}>Add a new note</button>
+        <div>{this.state.emptyError}</div>
           <Notes items={notes} onEdit={this.itemEdited.bind(this)} />
           </div>
     );
@@ -29,16 +31,19 @@ export default class App extends React.Component {
   }
   itemEdited(i, task) {
     var notes = this.state.notes;
-
+    var emptyError = false;
     if(task) {
       notes[i].task = task;
+      emptyError = '';
     }
     else {
       notes = notes.slice(0, i).concat(notes.slice(i + 1));
+      emptyError = 'Empty notes are not allowed.';
     }
 
     this.setState({
-      notes: notes
+      notes: notes,
+      emptyError: emptyError
     });
   }
 }
