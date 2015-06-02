@@ -25,7 +25,7 @@ export default class Note extends React.Component {
     return (
       <div>{
         edited
-        ? <input ref="taskInput" className="edit-input" type="text"
+        ? <input ref="taskInput" placeholder="Enter a note" className="edit-input" type="text"
           defaultValue={task}
           onBlur={this.finishEdit.bind(this)}
           onKeyPress={this.checkEnter.bind(this)}/>
