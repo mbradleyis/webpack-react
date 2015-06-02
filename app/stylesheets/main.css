@@ -1,0 +1,13 @@
+body {
+  background: white;
+}
+
+.horizontal-notes{
+  width: 100%;
+  display: inline;
+  border: 1px solid red;
+}
+
+.edit-input{
+  
+}
