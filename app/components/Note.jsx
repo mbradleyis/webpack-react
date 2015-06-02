@@ -20,15 +20,22 @@ export default class Note extends React.Component {
   }
   render() {
     var task = this.props.task;
+    var details = this.props.details;
     var edited = (task === '' || this.state.edited);
 
     return (
       <div>{
         edited
-        ? <input ref="taskInput" placeholder="Enter a note" className="edit-input" type="text"
-          defaultValue={task}
-          onBlur={this.finishEdit.bind(this)}
-          onKeyPress={this.checkEnter.bind(this)}/>
+        ? <div>
+          <input ref="taskInput" placeholder="Enter a title" className="edit-input" type="text"
+            defaultValue={task}
+            onBlur={this.finishEdit.bind(this)}
+            onKeyPress={this.checkEnter.bind(this)}/>
+          <textarea ref="taskDetails" placeholder="Enter details" className="edit-input"
+            defaultValue={details}
+            onBlur={this.finishEdit.bind(this)}
+            onKeyPress={this.checkEnter.bind(this)}/>
+          </div>
         : <div onClick={this.edit.bind(this)}>{task}</div>
       }</div>
     );

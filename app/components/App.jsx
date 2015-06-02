@@ -13,11 +13,13 @@ export default class App extends React.Component {
   render() {
 
     var notes = this.state.notes;
-
+    var errorStyle = {
+      color: 'red'
+    };
     return (
       <div>
         <button onClick={this.addItem.bind(this)}>Add a new note</button>
-        <div>{this.state.emptyError}</div>
+        <div style={errorStyle}>{this.state.emptyError}</div>
           <Notes items={notes} onEdit={this.itemEdited.bind(this)} />
           </div>
     );
