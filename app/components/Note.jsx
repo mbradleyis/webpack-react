@@ -2,12 +2,13 @@ import React from 'react';
 
 export default class Note extends React.Component {
   constructor(props: {
-    task: string;
+    title: string;
+    details: string;
     onEdit: Function;
   }) {
     super(props);
     var edited;
-    if(this.props.task === ''){
+    if(this.props.title === ''){
       edited = true;
     }else{
       edited = false;
@@ -19,24 +20,25 @@ export default class Note extends React.Component {
 
   }
   render() {
-    var task = this.props.task;
+    var title = this.props.title;
     var details = this.props.details;
-    var edited = (task === '' || this.state.edited);
+    console.log(title, details);
+    var edited = (title === '' || this.state.edited);
 
     return (
       <div>{
         edited
         ? <div>
           <input ref="taskInput" placeholder="Enter a title" className="edit-input" type="text"
-            defaultValue={task}
-            onBlur={this.finishEdit.bind(this)}
-            onKeyPress={this.checkEnter.bind(this)}/>
+            defaultValue={title}
+          />
+          <br/>
           <textarea ref="taskDetails" placeholder="Enter details" className="edit-input"
             defaultValue={details}
             onBlur={this.finishEdit.bind(this)}
             onKeyPress={this.checkEnter.bind(this)}/>
           </div>
-        : <div onClick={this.edit.bind(this)}>{task}<br/>{details}</div>
+        : <div onClick={this.edit.bind(this)}>{title}<br/>{details}</div>
       }</div>
     );
   }
@@ -60,8 +62,12 @@ export default class Note extends React.Component {
       this.finishEdit(e);
     }
   }
-  finishEdit(e) {
-    this.props.onEdit(e.target.value);
+  finishEdit() {
+    console.log(this.refs);
+    this.props.onEdit({
+      title: this.refs.taskInput.getDOMNode().value,
+      details: this.refs.taskDetails.getDOMNode().value
+    });
 
     this.setState({
       edited: false
