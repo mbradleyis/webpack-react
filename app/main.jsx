@@ -6,5 +6,6 @@ import App from './components/App';
 main();
 
 function main() {
-    React.render(<App />, document.getElementById('app'));
+  React.render(<App />, document.getElementById('app'));
+  React.render(<App />, document.getElementById('app2'));
 }
