@@ -13,7 +13,6 @@ export default class App extends React.Component {
   render() {
 
     var notes = this.state.notes;
-    console.log(notes);
     var errorStyle = {
       color: 'red'
     };
@@ -36,12 +35,16 @@ export default class App extends React.Component {
   itemEdited(i, note) {
     var notes = this.state.notes;
     var emptyError = false;
-    if(note) {
+    if(note.title) {
       notes[i].title = note.title;
+      emptyError = '';
+    }
+    if(note.details) {
       notes[i].details = note.details;
       emptyError = '';
     }
-    else {
+
+    if(!note.title && !note.details) {
       notes = notes.slice(0, i).concat(notes.slice(i + 1));
       emptyError = 'Empty notes are not allowed.';
     }

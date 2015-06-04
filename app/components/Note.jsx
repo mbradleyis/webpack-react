@@ -7,39 +7,57 @@ export default class Note extends React.Component {
     onEdit: Function;
   }) {
     super(props);
-    var edited;
+    var editedTitle;
+    var editedDetails;
     if(this.props.title === ''){
-      edited = true;
+      editedTitle = true;
     }else{
-      edited = false;
+      editedTitle = false;
+    }
+    if(this.props.details === ''){
+      editedDetails = true;
+    }else{
+      editedDetails = false;
     }
 
     this.state = {
-      edited: edited
+      editedTitle: editedTitle,
+      editedDetails: editedDetails
     };
 
   }
   render() {
     var title = this.props.title;
     var details = this.props.details;
-    console.log(title, details);
-    var edited = (title === '' || this.state.edited);
-
-    return (
-      <div>{
-        edited
-        ? <div>
+    var editedTitle = (title === '' || this.state.editedTitle);
+    var editedDetails = (details === '' || this.state.editedDetails);
+    var titleComponent = editedTitle
+      ? <div>
           <input ref="taskInput" placeholder="Enter a title" className="edit-input" type="text"
+            onBlur={this.finishTitleEdit.bind(this)}
+            onKeyPress={this.checkTitleEnter.bind(this)}
             defaultValue={title}
           />
-          <br/>
+      </div>
+      :
+        <div onClick={this.editTitle.bind(this)}>{title}</div>;
+
+    var detailsComponent = editedDetails
+      ? <div>
           <textarea ref="taskDetails" placeholder="Enter details" className="edit-input"
             defaultValue={details}
-            onBlur={this.finishEdit.bind(this)}
-            onKeyPress={this.checkEnter.bind(this)}/>
-          </div>
-        : <div onClick={this.edit.bind(this)}>{title}<br/>{details}</div>
-      }</div>
+            onBlur={this.finishDetailsEdit.bind(this)}
+            onKeyPress={this.checkDetailsEnter.bind(this)}
+          />
+        </div>
+      :
+        <div onClick={this.editDetails.bind(this)}>{details}</div>;
+
+    return (
+      <div>
+          {titleComponent}
+          {detailsComponent}
+      </div>
     );
   }
   componentDidMount(){
@@ -52,25 +70,42 @@ export default class Note extends React.Component {
       this.refs.taskInput.getDOMNode().focus();
     }
   }
-  edit() {
+  editTitle() {
     this.setState({
-        edited: true
+        editedTitle: true
     });
   }
-  checkEnter(e) {
+  editDetails() {
+    this.setState({
+        editedDetails: true
+    });
+  }
+  checkTitleEnter(e) {
     if(e.key === 'Enter') {
-      this.finishEdit(e);
+      this.finishTitleEdit(e);
     }
   }
-  finishEdit() {
-    console.log(this.refs);
+  checkDetailsEnter(e) {
+    if(e.key === 'Enter') {
+      this.finishDetailsEdit(e);
+    }
+  }
+  finishTitleEdit() {
     this.props.onEdit({
       title: this.refs.taskInput.getDOMNode().value,
+    });
+
+    this.setState({
+      editedTitle: false
+    });
+  }
+  finishDetailsEdit() {
+    this.props.onEdit({
       details: this.refs.taskDetails.getDOMNode().value
     });
 
     this.setState({
-      edited: false
+      editedDetails: false
     });
   }
 }
