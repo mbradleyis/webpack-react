@@ -8,6 +8,7 @@
     {% } %}
   </head>
   <body>
+    My notepad
     <div id="app"></div>
 
     {% for (var chunk in o.htmlWebpackPlugin.files.chunks) { %}
