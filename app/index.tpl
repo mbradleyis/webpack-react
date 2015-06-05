@@ -8,6 +8,7 @@
     {% } %}
   </head>
   <body>
+    My notepad
     <div id="app"></div>
     <div id="app2"></div>
 
