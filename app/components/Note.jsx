@@ -12,15 +12,33 @@ export default class Note extends React.Component {
   render() {
     var title = this.props.note.title;
     var details = this.props.note.details;
-    var editedTitle = (title === '' || this.state.editedTitle);
-    var editedDetails = (details === '' || this.state.editedDetails);
+    var editedTitle = (title === '');
+    var editedDetails = (details === '');
 
     return (
       <div>
-        <ContentEditable onEdit={this.props.onEdit} content={title} edited={editedTitle} placeholder="Enter a title" />
-        <ContentEditable onEdit={this.props.onEdit} content={details} edited={editedDetails} placeholder="Enter a title" />
+        <ContentEditable ref="titleInput" onEdit={this.finishEdit.bind(this)} content={title} edited={editedTitle} placeholder="Enter a title" />
+        <ContentEditable ref="detailsInput" onEdit={this.finishEdit.bind(this)} content={details} edited={editedDetails} placeholder="Enter a title" />
         <div>created on {this.props.note.dateCreated}</div>
       </div>
     );
+  }
+  finishEdit() {
+    var title = this.refs.titleInput.refs.contentInput.getDOMNode().value;
+    var details = this.refs.detailsInput.refs.contentInput.getDOMNode().value;
+
+    if(!title || !details){
+      return;
+    }else{
+      this.props.onEdit({
+        title: title,
+        details: details
+      });
+    }
+    
+    this.setState({
+      title: title ? title : '',
+      details: details ? details : ''
+    });
   }
 }
