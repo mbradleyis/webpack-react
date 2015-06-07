@@ -10,7 +10,6 @@ export default class Notes extends React.Component {
   }
   render() {
     var notes = this.props.items;
-
     return (
       <ul className='notes'>{notes.map((note, i) =>
         <li className='note' key={'note' + i}>
