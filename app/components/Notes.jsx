@@ -15,8 +15,7 @@ export default class Notes extends React.Component {
       <ul className='notes'>{notes.map((note, i) =>
         <li className='note' key={'note' + i}>
           <Note
-            title={note.title}
-            details={note.details}
+            note={note}
             onEdit={this.props.onEdit.bind(this, i)} />
         </li>
       )}</ul>

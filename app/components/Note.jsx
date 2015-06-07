@@ -9,12 +9,12 @@ export default class Note extends React.Component {
     super(props);
     var editedTitle;
     var editedDetails;
-    if(this.props.title === ''){
+    if(this.props.note.title === ''){
       editedTitle = true;
     }else{
       editedTitle = false;
     }
-    if(this.props.details === ''){
+    if(this.props.note.details === ''){
       editedDetails = true;
     }else{
       editedDetails = false;
@@ -27,8 +27,8 @@ export default class Note extends React.Component {
 
   }
   render() {
-    var title = this.props.title;
-    var details = this.props.details;
+    var title = this.props.note.title;
+    var details = this.props.note.details;
     var editedTitle = (title === '' || this.state.editedTitle);
     var editedDetails = (details === '' || this.state.editedDetails);
     var titleComponent = editedTitle
@@ -53,10 +53,13 @@ export default class Note extends React.Component {
       :
         <div onClick={this.editDetails.bind(this)}>{details}</div>;
 
+    var dateCreatedComponent = <div>created on {this.props.note.dateCreated}</div>;
+
     return (
       <div>
           {titleComponent}
           {detailsComponent}
+          {dateCreatedComponent}
       </div>
     );
   }
