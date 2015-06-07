@@ -28,7 +28,8 @@ export default class App extends React.Component {
     this.setState({
       notes: this.state.notes.concat([{
         title: '',
-        details: ''
+        details: '',
+        dateCreated: new Date().toString()
       }])
     });
   }
