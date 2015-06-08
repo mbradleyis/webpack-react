@@ -11,13 +11,23 @@ export default class ContentEditable extends React.Component {
   render() {
     var content = this.props.content;
     var placeholder = this.props.placeholder;
+    var single = this.props.single;
     var edited = (content === '');
+    var field = single
+    ?
+      <input ref="contentInput" placeholder={placeholder} className="edit-input" type="text"
+        onKeyPress={this.checkEnter.bind(this)}
+        defaultValue={content}
+      />
+    :
+      <textarea ref="contentInput" placeholder={placeholder} className="edit-input" type="text"
+        onKeyPress={this.checkEnter.bind(this)}
+        defaultValue={content}
+      />;
+
     var contentComponent = (edited
       ? <div>
-          <input ref="contentInput" placeholder={placeholder} className="edit-input" type="text"
-            onKeyPress={this.checkEnter.bind(this)}
-            defaultValue={content}
-          />
+          {field}
         </div>
       :
         <div onClick={this.editContent.bind(this)}>{content}</div>
@@ -29,16 +39,16 @@ export default class ContentEditable extends React.Component {
       </div>
     );
   }
-  // componentDidMount(){
-  //   if(this.refs.contentInput){
-  //     this.refs.contentInput.getDOMNode().focus();
-  //   }
-  // }
-  // componentDidUpdate(){
-  //   if(this.refs.contentInput){
-  //     this.refs.contentInput.getDOMNode().focus();
-  //   }
-  // }
+  componentDidMount(){
+    if(this.props.focusOnEmpty && this.refs.contentInput){
+      this.refs.contentInput.getDOMNode().focus();
+    }
+  }
+  componentDidUpdate(){
+    if(this.props.focusOnEmpty && this.refs.contentInput){
+      this.refs.contentInput.getDOMNode().focus();
+    }
+  }
   editContent() {
     this.setState({
         edited: true
