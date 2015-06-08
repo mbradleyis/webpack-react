@@ -14,11 +14,12 @@ export default class Note extends React.Component {
     var details = this.props.note.details;
     var editedTitle = (title === '');
     var editedDetails = (details === '');
+    var focusOnEmpty = (!editedTitle || !editedDetails);
 
     return (
       <div>
-        <ContentEditable ref="titleInput" onEdit={this.finishEdit.bind(this)} content={title} edited={editedTitle} placeholder="Enter a title" />
-        <ContentEditable ref="detailsInput" onEdit={this.finishEdit.bind(this)} content={details} edited={editedDetails} placeholder="Enter a title" />
+        <ContentEditable single="true" focusOnEmpty={focusOnEmpty} ref="titleInput" onEdit={this.finishEdit.bind(this)} content={title} edited={editedTitle} placeholder="Enter a title" />
+        <ContentEditable ref="detailsInput" onEdit={this.finishEdit.bind(this)} content={details} edited={editedDetails} placeholder="Enter a description" />
         <div>created on {this.props.note.dateCreated}</div>
       </div>
     );
@@ -35,7 +36,7 @@ export default class Note extends React.Component {
         details: details
       });
     }
-    
+
     this.setState({
       title: title ? title : '',
       details: details ? details : ''
