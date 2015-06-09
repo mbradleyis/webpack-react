@@ -12,7 +12,7 @@ export default class ContentEditable extends React.Component {
     var content = this.props.content;
     var placeholder = this.props.placeholder;
     var single = this.props.single;
-    var edited = (content === '');
+    var edited = (content === '' || (this.state && this.state.edited));
     var field = single
     ?
       <input ref="contentInput" placeholder={placeholder} className="edit-input" type="text"
