@@ -10,8 +10,6 @@
   <body>
     My notepad
     <div id="app"></div>
-    <div id="app2"></div>
-
     {% for (var chunk in o.htmlWebpackPlugin.files.chunks) { %}
     <script src="{%=o.htmlWebpackPlugin.files.chunks[chunk].entry %}"></script>
     {% } %}
