@@ -20,7 +20,7 @@ export default class ContentEditable extends React.Component {
         defaultValue={content}
       />
     :
-      <textarea ref="contentInput" placeholder={placeholder} className="edit-input" type="text"
+      <textarea ref="contentInput" placeholder={placeholder} className="edit-input"
         onKeyPress={this.checkEnter.bind(this)}
         defaultValue={content}
       />;
