@@ -12,13 +12,13 @@ export default class Note extends React.Component {
   render() {
     var title = this.props.note.title;
     var details = this.props.note.details;
-    var editedTitle = (title === '');
-    var editedDetails = (details === '');
+    var editedTitle = title === '' ? true : false;
+    var editedDetails = details === '' ? true : false;
     var focusOnEmpty = (!editedTitle || !editedDetails);
 
     return (
       <div>
-        <ContentEditable single="true" focusOnEmpty={focusOnEmpty} ref="titleInput" onEdit={this.finishEdit.bind(this)} content={title} edited={editedTitle} placeholder="Enter a title" />
+        <ContentEditable focusOnEmpty={focusOnEmpty} single="true" ref="titleInput" onEdit={this.finishEdit.bind(this)} content={title} edited={editedTitle} placeholder="Enter a title" />
         <ContentEditable ref="detailsInput" onEdit={this.finishEdit.bind(this)} content={details} edited={editedDetails} placeholder="Enter a description" />
         <div>created on {this.props.note.dateCreated}</div>
       </div>

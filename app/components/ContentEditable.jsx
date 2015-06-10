@@ -7,12 +7,16 @@ export default class ContentEditable extends React.Component {
     onEdit: Function;
   }) {
     super(props);
+    this.state = {
+      edited: false
+    };
   }
   render() {
     var content = this.props.content;
     var placeholder = this.props.placeholder;
     var single = this.props.single;
-    var edited = (content === '' || (this.state && this.state.edited));
+    var edited = (this.props.edited || this.state.edited);
+
     var field = single
     ?
       <input ref="contentInput" placeholder={placeholder} className="edit-input" type="text"
@@ -56,6 +60,9 @@ export default class ContentEditable extends React.Component {
   }
   checkEnter(e) {
     if(e.key === 'Enter') {
+      this.setState({
+        edited: false
+      });
       this.props.onEdit();
     }
   }
