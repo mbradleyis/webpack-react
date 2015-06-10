@@ -25,8 +25,8 @@ export default class Note extends React.Component {
     );
   }
   finishEdit() {
-    var title = this.refs.titleInput.refs.contentInput.getDOMNode().value;
-    var details = this.refs.detailsInput.refs.contentInput.getDOMNode().value;
+    var title = this.refs.titleInput.refs.contentInput ? this.refs.titleInput.refs.contentInput.getDOMNode().value : this.props.note.title;
+    var details = this.refs.detailsInput.refs.contentInput ? this.refs.detailsInput.refs.contentInput.getDOMNode().value : this.props.note.details;
 
     if(!title || !details){
       return;
@@ -38,8 +38,8 @@ export default class Note extends React.Component {
     }
 
     this.setState({
-      title: title ? title : '',
-      details: details ? details : ''
+      title: title ? title : this.props.title,
+      details: details ? details : this.props.details
     });
   }
 }
