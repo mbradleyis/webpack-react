@@ -1,3 +1,8 @@
 # webpack-react
 
-This is a playground for webpack and reactjs
+Example of an editable textfield / textarea using React and Webpack.
+
+# Instructions
+
+npm install
+npm start
