@@ -36,7 +36,7 @@ export default class ContentEditable extends React.Component {
           {field}
         </div>
       :
-        <div onDoubleClick={this.editContent.bind(this)}>{content}</div>
+        <div onDoubleClick={this.editContent.bind(this)}>{single ? this.props.content : <pre>{this.props.content}</pre>}</div>
     );
 
     return (
@@ -67,6 +67,9 @@ export default class ContentEditable extends React.Component {
     this.props.onEdit();
   }
   checkEnter(e) {
+    if(!this.props.single){
+      return;
+    }
     if(e.key === 'Enter') {
       this.setState({
         edited: false
