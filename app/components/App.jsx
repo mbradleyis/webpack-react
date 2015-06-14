@@ -21,7 +21,7 @@ export default class App extends React.Component {
         <button onClick={this.addItem.bind(this)}>Add a new note</button>
         <div style={errorStyle}>{this.state.emptyError}</div>
         <Notes items={notes} onEdit={this.itemEdited.bind(this)} />
-        </div>
+      </div>
     );
   }
   addItem() {
@@ -50,7 +50,7 @@ export default class App extends React.Component {
       notes = notes.slice(0, i).concat(notes.slice(i + 1));
       emptyError = 'Empty notes are not allowed.';
     }
-    console.log('got to app', notes);
+
     this.setState({
       notes: notes,
       emptyError: emptyError

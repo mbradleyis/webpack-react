@@ -21,11 +21,13 @@ export default class ContentEditable extends React.Component {
     ?
       <input ref="contentInput" placeholder={placeholder} className="edit-input" type="text"
         onKeyPress={this.checkEnter.bind(this)}
+        onBlur={this.handleBlur.bind(this)}
         defaultValue={content}
       />
     :
       <textarea ref="contentInput" placeholder={placeholder} className="edit-input"
         onKeyPress={this.checkEnter.bind(this)}
+        onBlur={this.handleBlur.bind(this)}
         defaultValue={content}
       />;
 
@@ -34,22 +36,22 @@ export default class ContentEditable extends React.Component {
           {field}
         </div>
       :
-        <div onClick={this.editContent.bind(this)}>{content}</div>
+        <div onDoubleClick={this.editContent.bind(this)}>{content}</div>
     );
 
     return (
       <div>
-          {contentComponent}
+        {contentComponent}
       </div>
     );
   }
   componentDidMount(){
-    if(this.props.focusOnEmpty && this.refs.contentInput){
+    if(this.state.edited || (this.props.focusOnEmpty && this.refs.contentInput && this.refs.contentInput.getDOMNode().value === '')){
       this.refs.contentInput.getDOMNode().focus();
     }
   }
   componentDidUpdate(){
-    if(this.props.focusOnEmpty && this.refs.contentInput){
+    if(this.state.edited || (this.props.focusOnEmpty && this.refs.contentInput && this.refs.contentInput.getDOMNode().value === '')){
       this.refs.contentInput.getDOMNode().focus();
     }
   }
@@ -57,6 +59,12 @@ export default class ContentEditable extends React.Component {
     this.setState({
         edited: true
     });
+  }
+  handleBlur(){
+    this.setState({
+      edited: false
+    });
+    this.props.onEdit();
   }
   checkEnter(e) {
     if(e.key === 'Enter') {
