@@ -13,6 +13,7 @@ export default class Notes extends React.Component {
     return (
       <div className='notes'>{notes.map((note, i) =>
         <div className='note' key={'note' + i}>
+          <h1>Notes</h1>
           <Note
             note={note}
             onEdit={this.props.onEdit.bind(this, i)} />
