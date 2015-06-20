@@ -4,7 +4,7 @@ var webpack = require('webpack');
 var merge = require('./lib/merge');
 
 var TARGET = process.env.TARGET;
-var ROOT_PATH = path.resolve(__dirname + '/app');
+var ROOT_PATH = path.resolve(__dirname);
 
 var common = {
   entry: [path.join(ROOT_PATH, 'app/main.jsx')],
@@ -22,7 +22,7 @@ var common = {
         loaders: ['style', 'css'],
       }
     ]
-  },
+  }
 };
 
 var mergeConfig = merge.bind(null, common);
