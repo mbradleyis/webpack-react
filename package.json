@@ -4,8 +4,10 @@
   "description": "Webpack demo app",
   "main": "index.js",
   "scripts": {
-    "build": "TARGET=build webpack",
+    "build": "TARGET=build webpack --config webpack.config.js --progress --profile --colors",
+    "dev-server": "TARGET=dev webpack --config webpack.config.js --progress --profile --colors",
     "start": "TARGET=dev node dev-server/server.js",
+    "deploy": "serve build",
     "lint": "eslint . --ext .js --ext .jsx"
   },
   "keywords": [
