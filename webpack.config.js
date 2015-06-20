@@ -4,7 +4,7 @@ var webpack = require('webpack');
 var merge = require('./lib/merge');
 
 var TARGET = process.env.TARGET;
-var ROOT_PATH = path.resolve(__dirname);
+var ROOT_PATH = path.resolve(__dirname + '/app');
 
 var common = {
   entry: [path.join(ROOT_PATH, 'app/main.jsx')],
