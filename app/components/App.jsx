@@ -11,7 +11,6 @@ export default class App extends React.Component {
     };
   }
   render() {
-
     var notes = this.state.notes;
     var errorStyle = {
       color: 'red'
@@ -34,13 +33,13 @@ export default class App extends React.Component {
     });
   }
   itemEdited(i, note) {
-
     var notes = this.state.notes;
     var emptyError = false;
     if(note.title) {
       notes[i].title = note.title;
       emptyError = '';
     }
+    
     if(note.details) {
       notes[i].details = note.details;
       emptyError = '';
