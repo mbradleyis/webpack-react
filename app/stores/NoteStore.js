@@ -4,20 +4,18 @@ import NoteActions from '../actions/NoteActions';
 class NoteStore {
   constructor() {
     this.bindActions(NoteActions);
-
     this.notes = [];
   }
-  create(task) {
+  create(note) {
     const notes = this.notes;
-
     this.setState({
-      notes: notes.concat({task})
+      notes: notes.concat({note})
     });
   }
-  update({id, task}) {
+  update({id, note}) {
     const notes = this.notes;
 
-    notes[id].task = task;
+    notes[id] = note;
 
     this.setState({
       notes: notes
