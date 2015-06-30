@@ -1,11 +1,11 @@
 import alt from '../libs/alt';
 
 class NoteActions {
-  create(task) {
-    this.dispatch(task);
+  create(note) {
+    this.dispatch(note);
   }
-  update(id, task) {
-    this.dispatch({id, task});
+  update(id, note) {
+    this.dispatch({id, note});
   }
   remove(id) {
     this.dispatch(id);
