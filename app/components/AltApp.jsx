@@ -2,6 +2,8 @@ import React from 'react';
 import Notes from './Notes';
 import NoteActions from '../actions/NoteActions';
 import NoteStore from '../stores/NoteStore';
+import storage from '../libs/Storage';
+
 
 export default class App extends React.Component {
   constructor(props) {
