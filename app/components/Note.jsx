@@ -10,10 +10,11 @@ export default class Note extends React.Component {
     super(props);
   }
   render() {
+    console.log(this.props.note);
     var title = this.props.note.title;
     var details = this.props.note.details;
-    var editedTitle = title === '' ? true : false;
-    var editedDetails = details === '' ? true : false;
+    var editedTitle = !title ? true : false;
+    var editedDetails = !details ? true : false;
 //<div>created on {this.props.note.dateCreated}</div>
     return (
       <div>

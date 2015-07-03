@@ -9,6 +9,8 @@ export default class App extends React.Component {
   constructor(props) {
     super(props);
 
+    NoteActions.init(storage.get('notes'));
+
     this.state = NoteStore.getState();
   }
   componentDidMount() {
@@ -18,7 +20,8 @@ export default class App extends React.Component {
     NoteStore.unlisten(this.storeChanged.bind(this));
   }
   storeChanged(state) {
-    this.setState(state);
+    storage.set('notes', state);
+    this.setState(NoteStore.getState());
   }
   render() {
 

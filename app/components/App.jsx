@@ -39,7 +39,7 @@ export default class App extends React.Component {
       notes[i].title = note.title;
       emptyError = '';
     }
-    
+
     if(note.details) {
       notes[i].details = note.details;
       emptyError = '';
