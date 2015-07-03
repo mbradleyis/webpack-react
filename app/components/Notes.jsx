@@ -9,12 +9,13 @@ export default class Notes extends React.Component {
     super(props);
   }
   render() {
+    console.log('alsdfj', this.props);
     var notes = this.props.items;
     return (
       <div className='notes'>{notes.map((note, i) =>
         <div className='note' key={'note' + i}>
           <Note
-            note={note.note}
+            note={note}
             onEdit={this.props.onEdit.bind(this, i)} />
         </div>
       )}</div>
