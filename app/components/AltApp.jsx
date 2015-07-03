@@ -3,36 +3,27 @@ import Notes from './Notes';
 import NoteActions from '../actions/NoteActions';
 import NoteStore from '../stores/NoteStore';
 import storage from '../libs/Storage';
+import persist from '../decorators/persist';
+import connect from '../decorators/connect';
 
+const noteStorageName = 'notes';
 
-export default class App extends React.Component {
-  constructor(props) {
+class App extends React.Component {
+  constructor(props: {
+    notes: Array;
+  }) {
     super(props);
+  }
 
-    NoteActions.init(storage.get('notes'));
-
-    this.state = NoteStore.getState();
-  }
-  componentDidMount() {
-    NoteStore.listen(this.storeChanged.bind(this));
-  }
-  componentWillUnmount() {
-    NoteStore.unlisten(this.storeChanged.bind(this));
-  }
-  storeChanged(state) {
-    storage.set('notes', state);
-    this.setState(NoteStore.getState());
-  }
   render() {
-
-    var notes = this.state.notes;
+    var notes = this.props.notes;
     var errorStyle = {
       color: 'red'
     };
     return (
       <div>
         <button onClick={this.addItem.bind(this)}>Add a new note</button>
-        <div style={errorStyle}>{this.state.emptyError}</div>
+        <div style={errorStyle}>{this.props.emptyError}</div>
         <Notes items={notes} onEdit={this.itemEdited.bind(this)} />
       </div>
     );
@@ -47,7 +38,7 @@ export default class App extends React.Component {
 
   itemEdited(id, note) {
 
-    var notes = this.state.notes;
+    var notes = this.props.notes;
     var emptyError = false;
     if(note.title) {
       notes[id].title = note.title;
@@ -75,3 +66,10 @@ export default class App extends React.Component {
     });
   }
 }
+
+export default persist(
+  connect(App, NoteStore),
+  storage,
+  noteStorageName,
+  () => NoteStore.getState()
+);
