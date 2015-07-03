@@ -9,7 +9,6 @@ export default class Notes extends React.Component {
     super(props);
   }
   render() {
-    console.log('alsdfj', this.props);
     var notes = this.props.items;
     return (
       <div className='notes'>{notes.map((note, i) =>
