@@ -1,58 +1,80 @@
 import React from 'react';
 import Notes from './Notes';
+import NoteActions from '../actions/NoteActions';
+import NoteStore from '../stores/NoteStore';
+import storage from '../libs/Storage';
+import persist from '../decorators/persist';
+import connect from '../decorators/connect';
 
-export default class App extends React.Component {
-  constructor() {
-    super();
+const noteStorageName = 'notes';
 
-    this.state = {
-      notes: [],
-      emptyError: ''
-    };
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+
+    NoteActions.init(storage.get('notes'));
+    this.state = NoteStore.getState();
+  }
+  storeChanged(d) {
+    storage.set('notes', d);
+
+    this.setState(NoteStore.getState());
   }
   render() {
-    var notes = this.state.notes;
+    var notes = this.props.notes;
     var errorStyle = {
       color: 'red'
     };
     return (
       <div>
         <button onClick={this.addItem.bind(this)}>Add a new note</button>
-        <div style={errorStyle}>{this.state.emptyError}</div>
+        <div style={errorStyle}>{this.props.emptyError}</div>
         <Notes items={notes} onEdit={this.itemEdited.bind(this)} />
       </div>
     );
   }
   addItem() {
-    this.setState({
-      notes: this.state.notes.concat([{
-        title: '',
-        details: '',
-        dateCreated: new Date().toString()
-      }])
+    NoteActions.create({
+      title: '',
+      details: '',
+      dateCreated: new Date().toString()
     });
   }
-  itemEdited(i, note) {
-    var notes = this.state.notes;
+
+  itemEdited(id, note) {
+
+    var notes = this.props.notes;
     var emptyError = false;
     if(note.title) {
-      notes[i].title = note.title;
+      notes[id].title = note.title;
       emptyError = '';
     }
-
     if(note.details) {
-      notes[i].details = note.details;
+      notes[id].details = note.details;
       emptyError = '';
     }
 
     if(!note.title && !note.details) {
-      notes = notes.slice(0, i).concat(notes.slice(i + 1));
+      NoteActions.remove(id);
       emptyError = 'Empty notes are not allowed.';
     }
 
+    if(note) {
+      NoteActions.update(id, note);
+    }
+    else {
+      NoteActions.remove(id);
+    }
+
     this.setState({
-      notes: notes,
       emptyError: emptyError
     });
   }
 }
+
+export default persist(
+  connect(App, NoteStore),
+  storage,
+  noteStorageName,
+  () => NoteStore.getState()
+);

@@ -13,7 +13,6 @@ export default (Component, storage, storageName, getData) => {
       }, false);
     }
     render() {
-      console.log('redering', Component);
       return <Component {...this.props} {...this.state} />;
     }
   };
