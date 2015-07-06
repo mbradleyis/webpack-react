@@ -4,10 +4,11 @@ import NoteActions from '../actions/NoteActions';
 class NoteStore {
   constructor() {
     this.bindActions(NoteActions);
-    this.notes = [];
   }
   init(data) {
-    this.setState(data || {notes: []});
+    var state = data || {notes: []};
+    console.log('state', state);
+    this.setState(state);
   }
   create(note) {
     const notes = this.notes;

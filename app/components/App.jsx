@@ -20,7 +20,7 @@ class App extends React.Component {
     this.setState(NoteStore.getState());
   }
   render() {
-    var notes = this.props.notes;
+    var notes = this.props.notes.notes;
     return (
       <div>
         <button onClick={this.addItem.bind(this)}>Add a new note</button>
