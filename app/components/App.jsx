@@ -20,14 +20,10 @@ class App extends React.Component {
     this.setState(NoteStore.getState());
   }
   render() {
-    var notes = this.props.notes;
-    var errorStyle = {
-      color: 'red'
-    };
+    var notes = this.props.notes.notes;
     return (
       <div>
         <button onClick={this.addItem.bind(this)}>Add a new note</button>
-        <div style={errorStyle}>{this.props.emptyError}</div>
         <Notes items={notes} onEdit={this.itemEdited.bind(this)} />
       </div>
     );
@@ -41,33 +37,19 @@ class App extends React.Component {
   }
 
   itemEdited(id, note) {
-
     var notes = this.props.notes;
-    var emptyError = false;
     if(note.title) {
       notes[id].title = note.title;
-      emptyError = '';
     }
     if(note.details) {
       notes[id].details = note.details;
-      emptyError = '';
     }
 
     if(!note.title && !note.details) {
       NoteActions.remove(id);
-      emptyError = 'Empty notes are not allowed.';
-    }
-
-    if(note) {
+    }else{
       NoteActions.update(id, note);
     }
-    else {
-      NoteActions.remove(id);
-    }
-
-    this.setState({
-      emptyError: emptyError
-    });
   }
 }
 

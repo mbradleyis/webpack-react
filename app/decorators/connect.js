@@ -15,6 +15,7 @@ export default (Component, store) => {
     }
     storeChanged() {
       this.setState(store.getState());
+      console.log('wtf');
     }
     render() {
       return <Component {...this.props} {...this.state} />;
