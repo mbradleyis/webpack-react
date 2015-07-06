@@ -26,18 +26,9 @@ export default class Note extends React.Component {
     var title = this.refs.titleInput.refs.contentInput ? this.refs.titleInput.refs.contentInput.getDOMNode().value : this.props.note.title;
     var details = this.refs.detailsInput.refs.contentInput ? this.refs.detailsInput.refs.contentInput.getDOMNode().value : this.props.note.details;
 
-    if(!title || !details){
-      return;
-    }else{
-      this.props.onEdit({
-        title: title,
-        details: details
-      });
-    }
-
-    this.setState({
-      title: title ? title : this.props.title,
-      details: details ? details : this.props.details
+    this.props.onEdit({
+      title: title,
+      details: details
     });
   }
 }
