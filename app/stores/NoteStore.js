@@ -6,7 +6,9 @@ class NoteStore {
     this.bindActions(NoteActions);
   }
   init(data) {
-    this.setState(data || {notes: []});
+    var state = data || {notes: []};
+    console.log('state', state);
+    this.setState(state);
   }
   create(note) {
     const notes = this.notes;

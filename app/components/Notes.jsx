@@ -13,9 +13,11 @@ export default class Notes extends React.Component {
     return (
       <div className='notes'>{notes.map((note, i) =>
         <div className='note' key={'note' + i}>
+          <div>{this.props.emptyError}</div>
           <Note
             note={note}
-            onEdit={this.props.onEdit.bind(this, i)} />
+            onEdit={this.props.onEdit.bind(this, i)}
+          />
         </div>
       )}</div>
     );

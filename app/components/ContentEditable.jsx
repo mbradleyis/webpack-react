@@ -61,9 +61,6 @@ export default class ContentEditable extends React.Component {
     });
   }
   handleBlur(){
-    this.setState({
-      edited: false
-    });
     this.props.onEdit();
   }
   checkEnter(e) {
