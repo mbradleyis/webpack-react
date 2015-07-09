@@ -12,7 +12,9 @@ class App extends React.Component {
   constructor(props) {
     super(props);
 
-    NoteActions.init(storage.get(noteStorageName));
+    NoteActions.init(storage.get('notes'));
+    this.state = NoteStore.getState();
+    console.log('3', this.state);
   }
   storeChanged(d) {
     storage.set('notes', d);
@@ -20,14 +22,15 @@ class App extends React.Component {
     this.setState(NoteStore.getState());
   }
   render() {
-    var notes = this.props.notes;
+    var notes = this.state.notes;
+    console.log(1, notes);
     var errorStyle = {
       color: 'red'
     };
     return (
       <div>
         <button onClick={this.addItem.bind(this)}>Add a new note</button>
-        <div style={errorStyle}>{this.props.emptyError}</div>
+        <div style={errorStyle}>{this.state.emptyError}</div>
         <Notes items={notes} onEdit={this.itemEdited.bind(this)} />
       </div>
     );

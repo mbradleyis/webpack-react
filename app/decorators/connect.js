@@ -6,6 +6,7 @@ export default (Component, store) => {
       super(props);
 
       this.state = store.getState();
+      console.log(2, this.state, this.props);
     }
     componentDidMount() {
       store.listen(this.storeChanged.bind(this));

@@ -4,9 +4,9 @@ import NoteActions from '../actions/NoteActions';
 class NoteStore {
   constructor() {
     this.bindActions(NoteActions);
-    this.notes = [];
   }
   init(data) {
+    console.log('init', data);
     this.setState(data || {notes: []});
   }
   create(note) {
