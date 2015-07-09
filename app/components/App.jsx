@@ -12,7 +12,8 @@ class App extends React.Component {
   constructor(props) {
     super(props);
 
-    NoteActions.init(storage.get(noteStorageName));
+    NoteActions.init(storage.get('notes'));
+    this.state = NoteStore.getState();
   }
   storeChanged(d) {
     storage.set('notes', d);
