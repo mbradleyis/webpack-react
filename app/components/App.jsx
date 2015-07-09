@@ -14,7 +14,6 @@ class App extends React.Component {
 
     NoteActions.init(storage.get('notes'));
     this.state = NoteStore.getState();
-    console.log('3', this.state);
   }
   storeChanged(d) {
     storage.set('notes', d);
@@ -23,7 +22,6 @@ class App extends React.Component {
   }
   render() {
     var notes = this.state.notes;
-    console.log(1, notes);
     var errorStyle = {
       color: 'red'
     };
