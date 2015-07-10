@@ -8,8 +8,7 @@ export default (Component, storage, storageName, getData) => {
       window.addEventListener('beforeunload', function() {
         // escape hatch for debugging
         if(!storage.get('debug')) {
-          console.log('alsdkjf');
-          //storage.set(storageName, getData());
+          storage.set(storageName, getData());
         }
       }, false);
     }
