@@ -17,11 +17,14 @@ class App extends React.Component {
   }
   storeChanged(d) {
     storage.set('notes', d);
-
-    this.setState(NoteStore.getState());
   }
   render() {
-    var notes = this.props.notes.notes;
+    console.log('props', this.props);
+    console.log('state', this.state);
+    var notes = this.state.notes;
+    if(!notes){
+      notes = [];
+    }
     return (
       <div>
         <button onClick={this.addItem.bind(this)}>Add a new note</button>
