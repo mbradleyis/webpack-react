@@ -6,32 +6,31 @@ class NoteStore {
     this.bindActions(NoteActions);
   }
   init(data) {
-    var state = data || {notes: []};
-    console.log('state', state);
-    this.setState(state);
+    this.setState(data || {notes: []});
+    console.log('init ', data);
   }
-  create(note) {
-    const notes = this.notes;
-    this.setState({
-      notes: notes.concat({note})
-    });
-  }
-  update({id, note}) {
+  create(task) {
     const notes = this.notes;
 
-    notes[id] = note;
-
     this.setState({
-      notes: notes
+      notes: notes.concat(task),
     });
+  }
+  update({id, task}) {
+    console.log('update', this.notes);
+    const notes = this.notes;
+    console.log('update', notes);
+    notes[id] = task;
+
+    this.setState({notes: notes});
   }
   remove(id) {
     const notes = this.notes;
 
     this.setState({
-      notes: notes.slice(0, id).concat(notes.slice(id + 1))
+      notes: notes.slice(0, id).concat(notes.slice(id + 1)),
     });
   }
 }
 
-export default alt.createStore(NoteStore, 'NoteStore');
+export default alt.createStore(NoteStore);

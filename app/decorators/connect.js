@@ -5,19 +5,22 @@ export default (Component, store) => {
     constructor(props) {
       super(props);
 
+      this.storeChanged = this.storeChanged.bind(this);
       this.state = store.getState();
     }
     componentDidMount() {
-      store.listen(this.storeChanged.bind(this));
+      store.listen(this.storeChanged);
+      this.setState(store.getState());
     }
     componentWillUnmount() {
-      store.unlisten(this.storeChanged.bind(this));
+      store.unlisten(this.storeChanged);
     }
     storeChanged() {
+      console.log('connect store changed', store.getState());
       this.setState(store.getState());
-      console.log('wtf store changed');
     }
     render() {
+      console.log('connect render', this.props, this.state);
       return <Component {...this.props} {...this.state} />;
     }
   };
