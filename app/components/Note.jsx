@@ -1,5 +1,7 @@
 import React from 'react';
 import ContentEditable from './ContentEditable';
+let mui = require('material-ui');
+let Paper = mui.Paper;
 
 export default class Note extends React.Component {
   constructor(props: {
@@ -14,12 +16,14 @@ export default class Note extends React.Component {
     var details = this.props.note.details;
     var editedTitle = !title ? true : false;
     var editedDetails = !details ? true : false;
-//<div>created on {this.props.note.dateCreated}</div>
     return (
-      <div>
-        <ContentEditable focusOnEmpty={true} single="true" ref="titleInput" onEdit={this.finishEdit.bind(this)} content={title} edited={editedTitle} placeholder="Enter a title" />
-        <ContentEditable ref="detailsInput" onEdit={this.finishEdit.bind(this)} content={details} edited={editedDetails} placeholder="Enter a description" />
-      </div>
+      <Paper zDepth={2}>
+        <div>
+          <ContentEditable focusOnEmpty={true} single="true" ref="titleInput" onEdit={this.finishEdit.bind(this)} content={title} edited={editedTitle} placeholder="Enter a title" />
+          <ContentEditable ref="detailsInput" onEdit={this.finishEdit.bind(this)} content={details} edited={editedDetails} placeholder="Enter a description" />
+          <div>created on {this.props.note.dateCreated}</div>
+          </div>
+      </Paper>
     );
   }
   finishEdit() {
