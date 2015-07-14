@@ -12,16 +12,18 @@ class App extends React.Component {
   constructor(props) {
     super(props);
 
-    NoteActions.init(storage.get('notes'));
+    NoteActions.init(storage.get(noteStorageName));
+
     this.state = NoteStore.getState();
   }
-  storeChanged(d) {
-    storage.set('notes', d);
+  storeChanged() {
+    this.setState(NoteStore.getState());
   }
   render() {
-    console.log('props', this.props);
-    console.log('state', this.state);
-    var notes = this.state.notes;
+    console.log('app props', this.props);
+    console.log('app state', this.state);
+
+    var notes = this.props.notes;
     if(!notes){
       notes = [];
     }
@@ -52,6 +54,7 @@ class App extends React.Component {
     if(!note.title && !note.details) {
       NoteActions.remove(id);
     }else{
+      console.log('app update', note);
       NoteActions.update(id, note);
     }
   }
