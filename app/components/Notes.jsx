@@ -1,5 +1,8 @@
 import React from 'react';
-import Note from './Note';
+import NoteMaterialUI from './NoteMaterialUI';
+let mui = require('material-ui');
+let List = mui.List;
+let ListItem = mui.ListItem;
 
 export default class Notes extends React.Component {
   constructor(props: {
@@ -11,15 +14,15 @@ export default class Notes extends React.Component {
   render() {
     var notes = this.props.items;
     return (
-      <div className='notes'>{notes.map((note, i) =>
-        <div className='note' key={'note' + i}>
+      <List className='notes'>{notes.map((note, i) =>
+        <ListItem className='note' key={'note' + i}>
           <div>{this.props.emptyError}</div>
-          <Note
+          <NoteMaterialUI
             note={note}
             onEdit={this.props.onEdit.bind(this, i)}
           />
-        </div>
-      )}</div>
+      </ListItem>
+      )}</List>
     );
   }
 }

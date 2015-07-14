@@ -7,7 +7,6 @@ class NoteStore {
   }
   init(data) {
     this.setState(data || {notes: []});
-    console.log('init ', data);
   }
   create(task) {
     const notes = this.notes;
@@ -17,9 +16,7 @@ class NoteStore {
     });
   }
   update({id, task}) {
-    console.log('update', this.notes);
     const notes = this.notes;
-    console.log('update', notes);
     notes[id] = task;
 
     this.setState({notes: notes});

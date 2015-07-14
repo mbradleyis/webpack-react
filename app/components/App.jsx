@@ -5,6 +5,8 @@ import NoteStore from '../stores/NoteStore';
 import storage from '../libs/Storage';
 import persist from '../decorators/persist';
 import connect from '../decorators/connect';
+let mui = require('material-ui');
+let RaisedButton = mui.RaisedButton;
 
 const noteStorageName = 'notes';
 
@@ -20,16 +22,13 @@ class App extends React.Component {
     this.setState(NoteStore.getState());
   }
   render() {
-    console.log('app props', this.props);
-    console.log('app state', this.state);
-
     var notes = this.props.notes;
     if(!notes){
       notes = [];
     }
     return (
       <div>
-        <button onClick={this.addItem.bind(this)}>Add a new note</button>
+        <RaisedButton onClick={this.addItem.bind(this)} label="add a new note" primary={true} />
         <Notes items={notes} onEdit={this.itemEdited.bind(this)} />
       </div>
     );
@@ -54,7 +53,6 @@ class App extends React.Component {
     if(!note.title && !note.details) {
       NoteActions.remove(id);
     }else{
-      console.log('app update', note);
       NoteActions.update(id, note);
     }
   }
