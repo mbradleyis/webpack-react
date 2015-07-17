@@ -11,9 +11,10 @@
 
 
 /** In this file, we create a React component which incorporates components provided by material-ui */
-let App = require('./components/App');
-let React = require('react');
-let mui = require('material-ui');
+import React from 'react';
+import mui from  = 'material-ui';
+import App from './components/App';
+
 let ThemeManager = new mui.Styles.ThemeManager();
 let Colors = mui.Styles.Colors;
 
@@ -41,4 +42,5 @@ let Main = React.createClass({
     );
   }
 });
+
 React.render(<Main />, document.body);
