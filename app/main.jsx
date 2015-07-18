@@ -12,7 +12,7 @@
 
 /** In this file, we create a React component which incorporates components provided by material-ui */
 import React from 'react';
-import mui from  = 'material-ui';
+import mui from 'material-ui';
 import App from './components/App';
 
 let ThemeManager = new mui.Styles.ThemeManager();
