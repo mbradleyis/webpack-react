@@ -7,7 +7,6 @@ let ListItem = mui.ListItem;
 export default class Notes extends React.Component {
   constructor(props: {
     items: Array;
-    onEdit: Function;
   }) {
     super(props);
   }
@@ -20,6 +19,7 @@ export default class Notes extends React.Component {
           <NoteMaterialUI
             note={note}
             onEdit={this.props.onEdit.bind(this, i)}
+            onDelete={this.props.onDelete.bind(this, i)}
           />
       </ListItem>
       )}</List>

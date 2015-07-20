@@ -33,7 +33,7 @@ class App extends React.Component {
       <div>
         <Snackbar ref="snackbar" message="saved" autoHideDuration={1000} onActionTouchTap={this.dismissSnackbar}/>
         <RaisedButton onClick={this.addItem.bind(this)} label="add a new note" primary={true} />
-        <Notes items={notes} onEdit={this.itemEdited.bind(this)} />
+        <Notes items={notes} onEdit={this.itemEdited.bind(this)} onDelete={this.itemDeleted.bind(this)} />
       </div>
     );
   }
@@ -45,6 +45,9 @@ class App extends React.Component {
     });
   }
 
+  itemDeleted(id) {
+    NoteActions.remove(id);
+  }
   itemEdited(id, note) {
     var notes = this.props.notes;
     if(note.title) {
