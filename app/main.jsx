@@ -31,8 +31,9 @@ let Main = React.createClass({
   },
 
   componentWillMount() {
+    ThemeManager.setTheme(ThemeManager.types.LIGHT);
     ThemeManager.setPalette({
-      accent1Color: Colors.deepOrange500
+      accent1Color: Colors.green500
     });
   },
 
