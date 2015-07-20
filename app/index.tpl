@@ -9,8 +9,8 @@
 
 
 
-
-    <script src="http://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js" type="text/javascript" async=""></script><script>
+  <link href='http://fonts.googleapis.com/css?family=Roboto:400,300,500' rel='stylesheet' type='text/css'>
+  <script src="http://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js" type="text/javascript" async=""></script><script>
     var WebFontConfig = {
       google: { families: [ 'Roboto:400,300,500:latin' ] }
     };
@@ -28,7 +28,6 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Webpack-React-MaterialUI</title>
   <meta name="description" content="Google's material design UI components built with React.">
-  <meta name="google-site-verification" content="dbA8VoTDehwUtcc3lY_skXjKLJK-D3iH3MXFX_IQRc4">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,300,500&amp;subset=latin" media="all">
