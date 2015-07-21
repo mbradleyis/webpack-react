@@ -10,7 +10,7 @@ class NoteStore {
   }
   create(task) {
     const notes = this.notes;
-
+    console.log(task);
     this.setState({
       notes: notes.concat(task),
     });

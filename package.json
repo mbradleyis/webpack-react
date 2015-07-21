@@ -35,6 +35,8 @@
   },
   "dependencies": {
     "alt": "^0.16.10",
+    "firebase": "^2.2.7",
+    "lodash": "^3.10.0",
     "material-ui": "^0.10.1",
     "react": "^0.13.3",
     "react-tap-event-plugin": "^0.1.7"
