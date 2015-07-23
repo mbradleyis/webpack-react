@@ -15,13 +15,13 @@ export default class Notes extends React.Component {
     var notes = this.props.items;
 
     return (
-      <List className='notes'>{notes.map((note, i) =>
-        <ListItem className='note' key={'note' + i}>
+      <List className='notes'>{notes.map((note) =>
+        <ListItem className='note' key={note.id}>
           <div>{this.props.emptyError}</div>
           <NoteMaterialUI
             note={note}
-            onEdit={this.props.onEdit.bind(this, i)}
-            onDelete={this.props.onDelete.bind(this, i)}
+            onEdit={this.props.onEdit.bind(this)}
+            onDelete={this.props.onDelete.bind(this)}
           />
       </ListItem>
       )}</List>

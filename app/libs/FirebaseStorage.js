@@ -5,7 +5,6 @@ export default {
   get: function(k, callback) {
     try {
       let data;
-      console.log('got data from firebase', k);
       myFirebaseRef.child(k).on('value', function(snapshot) {
         data = snapshot.val();
         callback(data);
