@@ -5,6 +5,7 @@ import NoteStore from '../stores/NoteStore';
 import storage from '../libs/FirebaseStorage';
 import persist from '../decorators/persist';
 import connect from '../decorators/connect';
+//import {sortBy} from 'lodash';
 
 let mui = require('material-ui');
 let RaisedButton = mui.RaisedButton;
@@ -32,6 +33,7 @@ class App extends React.Component {
     if(!notes){
       notes = [];
     }
+    //notes = sortBy(notes, 'dateCreated').reverse();
 
     return (
       <div>
@@ -46,7 +48,8 @@ class App extends React.Component {
     let newItem = {
       title: '',
       details: '',
-      dateCreated: new Date().toString()
+      dateCreated: new Date().toString(),
+      id: new Date().getTime()
     };
 
     NoteActions.create(newItem);
