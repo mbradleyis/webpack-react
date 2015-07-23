@@ -1,5 +1,6 @@
 import alt from '../libs/alt';
 import NoteActions from '../actions/NoteActions';
+import {findIndex} from 'lodash';
 
 class NoteStore {
   constructor() {
@@ -10,22 +11,28 @@ class NoteStore {
   }
   create(task) {
     const notes = this.notes;
-    console.log(task);
     this.setState({
       notes: notes.concat(task),
     });
   }
-  update({id, task}) {
+  update(task) {
     const notes = this.notes;
-    notes[id] = task;
+    var index = findIndex(notes, function(note) {
+      return note.id === task.id;
+    });
+    notes[index] = task;
 
     this.setState({notes: notes});
   }
   remove(id) {
     const notes = this.notes;
+    var index = findIndex(notes, function(note) {
+      return note.id === id;
+    });
 
+    var result = notes.slice(0, index).concat(notes.slice(index + 1));
     this.setState({
-      notes: notes.slice(0, id).concat(notes.slice(id + 1)),
+      notes: result,
     });
   }
 }

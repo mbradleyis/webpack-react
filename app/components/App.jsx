@@ -5,7 +5,7 @@ import NoteStore from '../stores/NoteStore';
 import storage from '../libs/FirebaseStorage';
 import persist from '../decorators/persist';
 import connect from '../decorators/connect';
-//import {sortBy} from 'lodash';
+import {sortBy} from 'lodash';
 
 let mui = require('material-ui');
 let RaisedButton = mui.RaisedButton;
@@ -29,11 +29,10 @@ class App extends React.Component {
   }
   render() {
     var notes = this.props.notes;
-
     if(!notes){
       notes = [];
     }
-    //notes = sortBy(notes, 'dateCreated').reverse();
+    notes = sortBy(notes, 'dateCreated').reverse();
 
     return (
       <div>
@@ -55,43 +54,40 @@ class App extends React.Component {
     NoteActions.create(newItem);
   }
 
-  itemDeleted(id) {
+  itemDeleted(note) {
     this.setState({
-      snackBarMessage: 'Deleted - ' + this.props.notes[id].title
+      snackBarMessage: 'Deleted - ' + note.title
     });
-    NoteActions.remove(id);
+    NoteActions.remove(note.id);
+    storage.set(noteStorageName, NoteStore.getState());
     this.refs.snackbar.show();
   }
-  itemEdited(id, note) {
-    var notes = this.props.notes;
-    notes[id].title = note.title;
-    notes[id].details = note.details;
-
+  itemEdited(note) {
     if(!note.title && !note.details) {
-      NoteActions.remove(id);
+      NoteActions.remove(note.id);
     }else{
-      NoteActions.update(id, note);
+      NoteActions.update(note);
     }
 
     storage.set(noteStorageName, NoteStore.getState());
     if(this.snackBarTimeout){
       // debounce snackbar
       clearTimeout(this.snackBarTimeout);
-      this.startSnackbarTimeout(id);
+      this.startSnackbarTimeout(note);
     }else{
       this.setState({
         savingMessage: 'saving...'
       });
-      this.startSnackbarTimeout(id);
+      this.startSnackbarTimeout(note);
     }
   }
-  startSnackbarTimeout(id){
+  startSnackbarTimeout(note){
     var scope = this;
     this.snackBarTimeout = setTimeout(function(){
 
       scope.setState({
         debounceSaved: false,
-        snackBarMessage: 'Saved - ' + scope.props.notes[id].title,
+        snackBarMessage: 'Saved - ' + note.title,
         savingMessage: ''
       });
 

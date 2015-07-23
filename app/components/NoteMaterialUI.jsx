@@ -58,7 +58,7 @@ export default class Note extends React.Component {
     this.refs.deleteDialog.show();
   }
   _onDialogSubmit(){
-    this.props.onDelete();
+    this.props.onDelete(this.props.note);
     this.refs.deleteDialog.dismiss();
   }
   _onDialogCancel(){
@@ -69,7 +69,9 @@ export default class Note extends React.Component {
     var details = this.refs.detailsInput.getValue();
     this.props.onEdit({
       title: title,
-      details: details
+      details: details,
+      id: this.props.note.id,
+      dateCreated: this.props.note.dateCreated
     });
   }
 }
