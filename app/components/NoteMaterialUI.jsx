@@ -48,7 +48,7 @@ export default class Note extends React.Component {
         <div><TextField
            multiLine={true} ref="detailsInput" hintText="Enter a title" value={details} onChange={this.finishEdit.bind(this)} />
         </div>
-        <div>created on {this.props.note.dateCreated}</div>
+        <div>created on {new Date(this.props.note.dateCreated).toString()}</div>
         <RaisedButton onClick={this._onDelete.bind(this)} label="Delete" primary={true} />
 
       </Paper>

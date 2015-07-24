@@ -47,7 +47,7 @@ class App extends React.Component {
     let newItem = {
       title: '',
       details: '',
-      dateCreated: new Date().toString(),
+      dateCreated: new Date().getTime(),
       id: new Date().getTime()
     };
 
