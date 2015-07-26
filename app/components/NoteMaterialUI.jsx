@@ -5,6 +5,7 @@ let Paper = mui.Paper;
 let Dialog = mui.Dialog;
 let RaisedButton = mui.RaisedButton;
 let FlatButton = mui.FlatButton;
+import moment from 'moment';
 
 export default class Note extends React.Component {
   constructor(props: {
@@ -48,7 +49,7 @@ export default class Note extends React.Component {
         <div><TextField
            multiLine={true} ref="detailsInput" hintText="Enter a title" value={details} onChange={this.finishEdit.bind(this)} />
         </div>
-        <div>{new Date(this.props.note.dateCreated).toString()}</div>
+        <div>{moment(new Date(this.props.note.dateCreated).toString()).format('MMMM Do YYYY, h:mm:ss a')}</div>
         <RaisedButton onClick={this._onDelete.bind(this)} label="Delete" primary={true} />
 
       </Paper>
