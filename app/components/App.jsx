@@ -37,7 +37,7 @@ class App extends React.Component {
     return (
       <div>
         <Snackbar ref="snackbar" message={this.state.snackBarMessage || ''} autoHideDuration={1000} onActionTouchTap={this.dismissSnackbar}/>
-        <RaisedButton onClick={this.addItem.bind(this)} label="+ New" primary={true} />
+        <RaisedButton onClick={this.addItem.bind(this)} label="New +" primary={true} />
         <div>{this.state.savingMessage}</div>
         <Notes items={notes} onEdit={this.itemEdited.bind(this)} onDelete={this.itemDeleted.bind(this)} />
       </div>
