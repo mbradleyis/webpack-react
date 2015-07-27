@@ -1,6 +1,13 @@
 let Firebase = require('firebase');
 let myFirebaseRef = new Firebase('https://webpack-react.firebaseio.com/');
-
+var connectedRef = new Firebase('https://webpack-react.firebaseio.com/.info/connected');
+connectedRef.on('value', function(snap) {
+  if (snap.val() === true) {
+    console.log('connected');
+  } else {
+    console.log('not connected');
+  }
+});
 export default {
   get: function(k, callback) {
     try {

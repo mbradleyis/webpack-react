@@ -6,10 +6,10 @@ export default (Component, storage, storageName, getData) => {
       super(props);
       window.addEventListener('beforeunload', function() {
         // escape hatch for debugging
-        // if(!storage.get('debug')) {
-        //   console.log(storageName, getData());
-        //   storage.set(storageName, getData());
-        // }
+        if(!storage.get('debug')) {
+          console.log(storageName, getData());
+          storage.set(storageName, getData());
+        }
       }, false);
     }
     render() {

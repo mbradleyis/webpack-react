@@ -3,6 +3,7 @@ import Notes from './Notes';
 import NoteActions from '../actions/NoteActions';
 import NoteStore from '../stores/NoteStore';
 import storage from '../libs/FirebaseStorage';
+import localStorage from '../libs/LocalStorage';
 import persist from '../decorators/persist';
 import connect from '../decorators/connect';
 import {sortBy} from 'lodash';
@@ -18,10 +19,11 @@ class App extends React.Component {
     super(props);
 
     NoteActions.init(storage.get(noteStorageName, this.onData.bind(this)));
-    this.state = NoteStore.getState();
+    this.state = {};
     this.state.savingMessage = '';
   }
   onData(data){
+    console.log('ondata', data);
     NoteActions.init(data);
   }
   dismissSnackbar(){
@@ -99,7 +101,7 @@ class App extends React.Component {
 
 export default persist(
   connect(App, NoteStore),
-  storage,
+  localStorage,
   noteStorageName,
   () => NoteStore.getState()
 );
