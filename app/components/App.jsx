@@ -16,6 +16,7 @@ const noteStorageName = 'notes';
 
 class App extends React.Component {
   constructor(props) {
+    console.log('App', props);
     super(props);
 
     NoteActions.init(storage.get(noteStorageName, this.onData.bind(this)));
@@ -34,6 +35,7 @@ class App extends React.Component {
     if(!notes){
       notes = [];
     }
+
     notes = sortBy(notes, 'dateCreated').reverse();
 
     return (
